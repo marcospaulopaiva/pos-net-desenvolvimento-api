@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using PlaceRentalApp.API.Middlewares;
 using PlaceRentalApp.API.Persistence;
 
@@ -11,8 +12,10 @@ namespace PlaceRentalApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddSingleton<PlaceRentalDbContext>();
-                
+            //builder.Services.AddSingleton<PlaceRentalDbContext>();
+            builder.Services.AddDbContext<PlaceRentalDbContext>(
+                o => o.UseInMemoryDatabase("PlaceRentalDb"));
+
             builder.Services.AddExceptionHandler<ApiExceptionHandler>();
             builder.Services.AddProblemDetails();
 

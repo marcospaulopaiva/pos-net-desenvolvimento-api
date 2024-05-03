@@ -5,6 +5,8 @@ namespace PlaceRentalApp.API.Entities
 {
     public class Place : BaseEntity
     {
+        protected Place() { }
+
         public Place(string title, string description, decimal dailyPrice, Address address, int allowedNumberPerson, bool allowPets, int createdBy)
             : base()
         {

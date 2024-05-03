@@ -72,6 +72,7 @@ namespace PlaceRentalApp.API.Controllers
                 );
 
             _context.Places.Add(place);
+            _context.SaveChanges();
 
             return CreatedAtAction(nameof(GetById), new { id = place.Id}, model);
         }
@@ -88,6 +89,9 @@ namespace PlaceRentalApp.API.Controllers
             }
 
             place.Update(model.Title, model.Description, model.DailyPrice);
+
+            _context.Places.Update(place);
+            _context.SaveChanges();
 
             return NoContent();
         }
@@ -106,6 +110,7 @@ namespace PlaceRentalApp.API.Controllers
             var amenity = new PlaceAmenity(model.Description, id);
 
             _context.PlaceAmenities.Add(amenity);
+            _context.SaveChanges();
 
             return NoContent();
         }
@@ -123,6 +128,9 @@ namespace PlaceRentalApp.API.Controllers
 
             place.SetAsDeleted();
 
+            _context.Places.Update(place);
+            _context.SaveChanges();
+
             return NoContent();
         }
 
@@ -130,19 +138,18 @@ namespace PlaceRentalApp.API.Controllers
         [HttpPost("{id}/books")]
         public IActionResult PostBook(int id, CreateBookInputModel model)
         {
-            var place = _context.Places.SingleOrDefault(p => p.Id == id);
+            var exists = _context.Places.Any(p => p.Id == id);
 
-            if (place is null)
+            if (!exists)
             {
                 return NotFound();
             }
 
             var book = new PlaceBook(model.IdUser, model.IdPlace, model.StartDate, model.EndDate, model.Comments);
-            // Pré EF
-            place.Books.Add(book);
-            // FIM Pré EF
+ 
 
             _context.PlaceBooks.Add(book);
+            _context.SaveChanges();
 
             return NoContent();
         }
