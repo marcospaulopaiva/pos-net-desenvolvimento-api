@@ -33,5 +33,12 @@ namespace PlaceRentalApp.API.Entities
         public PlaceStatus Status { get; private set; }
         public List<PlaceBook> Books { get; private set; }
         public List<PlaceAmenity> Amenities { get; private set;}
+
+        public void Update(string title, string description, decimal dailyPrice)
+        {
+            Title = title;
+            Description = description;
+            DailyPrice = dailyPrice;
+        }
     }
 }

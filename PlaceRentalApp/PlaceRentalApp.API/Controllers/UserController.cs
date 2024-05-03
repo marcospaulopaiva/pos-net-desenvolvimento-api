@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlaceRentalApp.API.Entities;
 using PlaceRentalApp.API.Models;
+using PlaceRentalApp.API.Persistence;
 
 namespace PlaceRentalApp.API.Controllers
 {
@@ -7,16 +9,33 @@ namespace PlaceRentalApp.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly PlaceRentalDbContext _context;
+        public UserController(PlaceRentalDbContext context)
+        {
+            this._context = context;
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok();
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
         [HttpPost]
         public IActionResult Post(CreateUserInputModel model)
         {
-            return CreatedAtAction(nameof(GetById), new {id = 1}, model);
+            var user = new User(model.FullName, model.Email, model.BirthDate);
+
+            _context.Users.Add(user);
+
+            return CreatedAtAction(nameof(GetById), new { user.Id }, model);
         }
     }
 }
