@@ -1,6 +1,6 @@
 
 using PlaceRentalApp.API.Middlewares;
-using PlaceRentalApp.API.Models;
+using PlaceRentalApp.API.Persistence;
 
 namespace PlaceRentalApp.API
 {
@@ -11,26 +11,8 @@ namespace PlaceRentalApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
-            // Opção 1
-            //var min = builder.Configuration.GetValue<int>("PlacesConfig:MinDescription");
-            //var max = builder.Configuration.GetValue<int>("PlacesConfig:MaxDescription");
-
-            //var config = new PlacesConfigurarion
-            //{
-            //    MinDescription = min,
-            //    MaxDescription = max
-            //};
-
-            // Opção 2
-            var config = new PlacesConfigurarion();
-            builder.Configuration.GetSection("PlacesConfig").Bind(config);
-
-            builder.Services.Configure<PlacesConfigurarion>(
-                builder.Configuration.GetSection("PlacesConfig"));
-
-            builder.Services.AddSingleton(config);
-
+            builder.Services.AddSingleton<PlaceRentalDbContext>();
+                
             builder.Services.AddExceptionHandler<ApiExceptionHandler>();
             builder.Services.AddProblemDetails();
 
