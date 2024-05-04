@@ -13,8 +13,15 @@ namespace PlaceRentalApp.API
 
             // Add services to the container.
             //builder.Services.AddSingleton<PlaceRentalDbContext>();
+            var connectionString = builder.Configuration
+                .GetConnectionString("PlaceRentalCs");
+
+            //InMemoryDatabase
+            //builder.Services.AddDbContext<PlaceRentalDbContext>(
+            //    o => o.UseInMemoryDatabase("PlaceRentalDb"));
+
             builder.Services.AddDbContext<PlaceRentalDbContext>(
-                o => o.UseInMemoryDatabase("PlaceRentalDb"));
+                o => o.UseSqlServer(connectionString));
 
             builder.Services.AddExceptionHandler<ApiExceptionHandler>();
             builder.Services.AddProblemDetails();
