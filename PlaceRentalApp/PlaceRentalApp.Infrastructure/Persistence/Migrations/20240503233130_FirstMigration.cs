@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace PlaceRentalApp.API.Persistence.Migrations
+namespace PlaceRentalApp.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration

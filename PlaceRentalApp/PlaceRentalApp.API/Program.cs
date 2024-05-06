@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using PlaceRentalApp.API.Middlewares;
-using PlaceRentalApp.API.Persistence;
+using PlaceRentalApp.Infrastructure.Persistence;
 
 namespace PlaceRentalApp.API
 {

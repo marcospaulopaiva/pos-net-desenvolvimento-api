@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceRentalApp.API", "Place
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceRentalApp.Core", "PlaceRentalApp.Core\PlaceRentalApp.Core.csproj", "{30C433CE-35F7-4896-9D21-C6AF13FDABF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceRentalApp.Infrastructure", "PlaceRentalApp.Infrastructure\PlaceRentalApp.Infrastructure.csproj", "{C01C698C-6B1E-457E-84B1-C26104AB0BFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{30C433CE-35F7-4896-9D21-C6AF13FDABF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30C433CE-35F7-4896-9D21-C6AF13FDABF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30C433CE-35F7-4896-9D21-C6AF13FDABF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01C698C-6B1E-457E-84B1-C26104AB0BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01C698C-6B1E-457E-84B1-C26104AB0BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01C698C-6B1E-457E-84B1-C26104AB0BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01C698C-6B1E-457E-84B1-C26104AB0BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlaceRentalApp.Core\PlaceRentalApp.Core.csproj" />
+    <ProjectReference Include="..\PlaceRentalApp.Infrastructure\PlaceRentalApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
