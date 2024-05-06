@@ -1,9 +1,9 @@
-﻿namespace PlaceRentalApp.API.Enums
+﻿namespace PlaceRentalApp.Core.Enums
 {
     public enum PlaceStatus
     {
         Inactive = 1,
-        Active  = 2,
+        Active = 2,
         Blocked = 3
     }
 }

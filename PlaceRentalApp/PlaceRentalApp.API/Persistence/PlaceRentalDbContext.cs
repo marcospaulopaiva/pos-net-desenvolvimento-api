@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlaceRentalApp.API.Entities;
+using static PlaceRentalApp.Core.Entities.BaseEntity;
 
 namespace PlaceRentalApp.API.Persistence
 {

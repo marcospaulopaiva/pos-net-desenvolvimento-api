@@ -1,6 +1,6 @@
-﻿namespace PlaceRentalApp.API.Entities
+﻿namespace PlaceRentalApp.Core.Entities
 {
-    public class BaseEntity
+    public abstract partial class BaseEntity
     {
         public BaseEntity()
         {
