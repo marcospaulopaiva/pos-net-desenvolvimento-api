@@ -1,4 +1,5 @@
-﻿using PlaceRentalApp.Application.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using PlaceRentalApp.Application.Exceptions;
 using PlaceRentalApp.Application.Models;
 using PlaceRentalApp.Core.ValueObjects;
 using PlaceRentalApp.Infrastructure.Persistence;
@@ -45,28 +46,33 @@ namespace PlaceRentalApp.Application.Services
             _context.SaveChanges();
         }
 
-        public List<Place> GetAllAvailable(string search, DateTime startDate, DateTime endDate)
+        public List<PlaceViewModel> GetAllAvailable(string search, DateTime startDate, DateTime endDate)
         {
             var availablePlaces = _context
                 .Places
+                .Include(p => p.User)
                 .Where(p =>
                     p.Title.Contains(search) &&
                     !p.Books.Any(b =>
                     (startDate >= b.StartDate && startDate <= b.EndDate) ||
                     (endDate >= b.StartDate && endDate <= b.EndDate) ||
                     (startDate <= b.StartDate && endDate >= b.EndDate))
-                    && !p.IsDeleted);
+                    && !p.IsDeleted)
+                .ToList();
 
-            return availablePlaces.ToList();
+            var model = availablePlaces.Select(
+                PlaceViewModel.FromEntity).ToList();
+
+            return model;
         }
 
-        public Place? GetById(int id)
+        public PlaceDetailsViewModel? GetById(int id)
         {
             var place = _context.Places.SingleOrDefault(p => p.Id == id);
 
             return place is null ? 
                 throw new NotFoundException() : 
-                place;
+                PlaceDetailsViewModel.FromEntity(place);
         }
 
         public int Insert(CreatePlaceInputModel model)
