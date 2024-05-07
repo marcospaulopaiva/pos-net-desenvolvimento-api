@@ -1,8 +1,6 @@
-
-using Microsoft.EntityFrameworkCore;
 using PlaceRentalApp.API.Middlewares;
-using PlaceRentalApp.Application.Services;
-using PlaceRentalApp.Infrastructure.Persistence;
+using PlaceRentalApp.Application;
+using PlaceRentalApp.Infrastructure;
 
 namespace PlaceRentalApp.API
 {
@@ -13,19 +11,10 @@ namespace PlaceRentalApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            //builder.Services.AddSingleton<PlaceRentalDbContext>();
-            var connectionString = builder.Configuration
-                .GetConnectionString("PlaceRentalCs");
+            builder.Services
+                .AddApplication()
+                .AddInfrastructure(builder.Configuration);
 
-            //InMemoryDatabase
-            //builder.Services.AddDbContext<PlaceRentalDbContext>(
-            //    o => o.UseInMemoryDatabase("PlaceRentalDb"));
-
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IPlaceService, PlaceService>();
-
-            builder.Services.AddDbContext<PlaceRentalDbContext>(
-                o => o.UseSqlServer(connectionString));
 
             builder.Services.AddExceptionHandler<ApiExceptionHandler>();
             builder.Services.AddProblemDetails();
