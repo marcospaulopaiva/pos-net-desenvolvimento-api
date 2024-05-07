@@ -5,8 +5,7 @@ namespace PlaceRentalApp.Application.Services
 {
     public interface IUserService
     {
-        User? GetById(int id);
-
-        int Insert(CreateUserInputModel model);
+        ResultViewModel<User?> GetById(int id);
+        ResultViewModel<int> Insert(CreateUserInputModel model);
     }
 }

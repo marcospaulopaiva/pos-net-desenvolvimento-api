@@ -1,5 +1,4 @@
-﻿using PlaceRentalApp.Application.Exceptions;
-using PlaceRentalApp.Application.Models;
+﻿using PlaceRentalApp.Application.Models;
 using PlaceRentalApp.Infrastructure.Persistence;
 using static PlaceRentalApp.Core.Entities.BaseEntity;
 
@@ -13,23 +12,23 @@ namespace PlaceRentalApp.Application.Services
         {
             _context = context;
         }
-        public User? GetById(int id)
+        public ResultViewModel<User?> GetById(int id)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
 
-            return user is null ? 
-                throw new NotFoundException() : 
-                user;
+            return user is null ?
+                ResultViewModel<User?>.Error("Not found") :
+                ResultViewModel<User?>.Success(user);
         }
 
-        public int Insert(CreateUserInputModel model)
+        public ResultViewModel<int> Insert(CreateUserInputModel model)
         {
             var user = new User(model.FullName, model.Email, model.BirthDate);
 
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return user.Id;
+            return ResultViewModel<int>.Success(user.Id);
         }
     }
 }

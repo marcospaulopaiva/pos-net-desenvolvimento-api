@@ -18,34 +18,44 @@ namespace PlaceRentalApp.API.Controllers
         [HttpGet]
         public IActionResult Get(string search, DateTime startDate, DateTime endDate)
         {
-            var availablePlaces = _placeService.GetAllAvailable(search, startDate, endDate);
+            var result = _placeService.GetAllAvailable(search, startDate, endDate);
 
-            return Ok(availablePlaces);
+            return Ok(result);
         }
 
         // GET api/places/1234
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var place = _placeService.GetById(id);
+            var result = _placeService.GetById(id);
 
-            return Ok(place);
+            if (!result.IsSuccess)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
         // POST api/places
         [HttpPost]
         public IActionResult Post(CreatePlaceInputModel model)
         {
-            var id = _placeService.Insert(model);
+            var result = _placeService.Insert(model);
 
-            return CreatedAtAction(nameof(GetById), new { id }, model);
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
         }
 
         // PUT api/places/1234
         [HttpPut]
         public IActionResult Put(int id, UpdatePlaceInputModel model) 
         {
-            _placeService.Update(id, model);
+            var result = _placeService.Update(id, model);
+
+            if (!result.IsSuccess)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
@@ -54,7 +64,12 @@ namespace PlaceRentalApp.API.Controllers
         [HttpPost("{id}/amenities")]
         public IActionResult PostAmenity(int id, CreatePlaceAmenityInputModel model)
         {
-           _placeService.InsertAmenity(id, model);
+            var result = _placeService.InsertAmenity(id, model);
+
+            if (!result.IsSuccess)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
@@ -63,7 +78,12 @@ namespace PlaceRentalApp.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id) 
         {
-            _placeService.Delete(id);
+            var result =  _placeService.Delete(id);
+
+            if (!result.IsSuccess)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
@@ -72,7 +92,12 @@ namespace PlaceRentalApp.API.Controllers
         [HttpPost("{id}/books")]
         public IActionResult PostBook(int id, CreateBookInputModel model)
         {
-            _placeService.Book(id,model);
+            var result = _placeService.Book(id,model);
+            
+            if (!result.IsSuccess)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
