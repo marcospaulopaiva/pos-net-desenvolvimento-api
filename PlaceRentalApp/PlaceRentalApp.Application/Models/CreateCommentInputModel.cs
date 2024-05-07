@@ -1,4 +1,4 @@
-﻿namespace PlaceRentalApp.API.Models
+﻿namespace PlaceRentalApp.Application.Models
 {
     public class CreateCommentInputModel
     {
