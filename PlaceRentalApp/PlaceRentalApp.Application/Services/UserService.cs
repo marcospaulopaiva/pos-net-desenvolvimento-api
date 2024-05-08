@@ -1,20 +1,21 @@
 ﻿using PlaceRentalApp.Application.Models;
-using PlaceRentalApp.Infrastructure.Persistence;
+using PlaceRentalApp.Core.Repositories;
 using static PlaceRentalApp.Core.Entities.BaseEntity;
 
 namespace PlaceRentalApp.Application.Services
 {
     public class UserService : IUserService
     {
-        private readonly PlaceRentalDbContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(PlaceRentalDbContext context)
+        public UserService(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
+
         public ResultViewModel<User?> GetById(int id)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            var user = _userRepository.GetById(id);
 
             return user is null ?
                 ResultViewModel<User?>.Error("Not found") :
@@ -25,8 +26,7 @@ namespace PlaceRentalApp.Application.Services
         {
             var user = new User(model.FullName, model.Email, model.BirthDate);
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            _userRepository.Add(user);
 
             return ResultViewModel<int>.Success(user.Id);
         }
