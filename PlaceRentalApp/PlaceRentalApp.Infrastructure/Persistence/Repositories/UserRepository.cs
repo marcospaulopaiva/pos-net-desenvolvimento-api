@@ -27,5 +27,11 @@ namespace PlaceRentalApp.Infrastructure.Persistence.Repositories
             return user;
         }
 
+        public User? GetByLoginAndHash(string email, string hash)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Email == email && u.Password == hash);
+
+            return user;
+        }
     }
 }

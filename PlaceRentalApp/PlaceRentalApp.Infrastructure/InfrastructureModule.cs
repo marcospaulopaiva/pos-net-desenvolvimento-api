@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using PlaceRentalApp.Core.Repositories;
+using PlaceRentalApp.Infrastructure.Auth;
 using PlaceRentalApp.Infrastructure.Persistence;
 using PlaceRentalApp.Infrastructure.Persistence.Repositories;
+using System.Text;
 
 namespace PlaceRentalApp.Infrastructure
 {
@@ -13,7 +17,8 @@ namespace PlaceRentalApp.Infrastructure
         {
             services
                 .AddData(configuration)
-                .AddRepositories();
+                .AddRepositories()
+                .AddAuth(configuration);
 
             return services;
         }
@@ -32,6 +37,31 @@ namespace PlaceRentalApp.Infrastructure
             services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             return services; 
-        }  
+        }
+
+        private static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
+        {
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+
+                        ValidIssuer = configuration["Jwt:Issuer"],
+                        ValidAudience = configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey
+                        (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                    };
+                });
+
+            services.AddScoped<IAuthService, AuthService>();
+            
+            return services;
+        }
     }
 }

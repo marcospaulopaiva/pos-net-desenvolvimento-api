@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PlaceRentalApp.Application.Models;
 using PlaceRentalApp.Application.Services;
 
@@ -16,6 +17,7 @@ namespace PlaceRentalApp.API.Controllers
 
         // GET api/places?search=casa&startData=2024-01-20
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get(string search, DateTime startDate, DateTime endDate)
         {
             var result = _placeService.GetAllAvailable(search, startDate, endDate);
@@ -25,6 +27,7 @@ namespace PlaceRentalApp.API.Controllers
 
         // GET api/places/1234
         [HttpGet("{id}")]
+        [Authorize(Roles = "client, admin")]
         public IActionResult GetById(int id)
         {
             var result = _placeService.GetById(id);
@@ -39,6 +42,7 @@ namespace PlaceRentalApp.API.Controllers
 
         // POST api/places
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post(CreatePlaceInputModel model)
         {
             var result = _placeService.Insert(model);
