@@ -49,6 +49,19 @@ namespace PlaceRentalApp.Core.Entities
 
                 return true;
             }
+
+            public void Block()
+            {
+                Status = PlaceStatus.Blocked;
+            }
+
+            public bool IsBookAllowed(bool hasPet, int amontOfPerson)
+            {
+                if(!AllowPets && hasPet)
+                    return false;
+
+                return amontOfPerson <= AllowedNumberPerson;
+            }
         }
     }
 }
