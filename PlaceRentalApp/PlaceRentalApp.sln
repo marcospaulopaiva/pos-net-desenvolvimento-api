@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceRentalApp.Core", "Plac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceRentalApp.Infrastructure", "PlaceRentalApp.Infrastructure\PlaceRentalApp.Infrastructure.csproj", "{C01C698C-6B1E-457E-84B1-C26104AB0BFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceRentalApp.Application", "PlaceRentalApp.Application\PlaceRentalApp.Application.csproj", "{0DAFAA15-F813-421A-B87A-1F8C4E42F9BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaceRentalApp.Application", "PlaceRentalApp.Application\PlaceRentalApp.Application.csproj", "{0DAFAA15-F813-421A-B87A-1F8C4E42F9BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4C281A10-0579-42E2-ABF6-389B47E03EFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaceRentalApp.UnitTests", "PlaceRentalApp.UnitTests\PlaceRentalApp.UnitTests.csproj", "{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{0DAFAA15-F813-421A-B87A-1F8C4E42F9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DAFAA15-F813-421A-B87A-1F8C4E42F9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DAFAA15-F813-421A-B87A-1F8C4E42F9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5EC3474-191F-4CDB-8B62-B9F5616A3DAB} = {4C281A10-0579-42E2-ABF6-389B47E03EFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A082CBA7-21E4-49E1-8B51-5BE7EB1AAF5E}
