@@ -20,4 +20,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PlaceRentalApp.Application\PlaceRentalApp.Application.csproj" />
+    <ProjectReference Include="..\PlaceRentalApp.Core\PlaceRentalApp.Core.csproj" />
+  </ItemGroup>
+
 </Project>
