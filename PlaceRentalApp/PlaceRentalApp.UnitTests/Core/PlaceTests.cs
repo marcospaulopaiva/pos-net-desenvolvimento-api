@@ -121,5 +121,35 @@ namespace PlaceRentalApp.UnitTests.Core
             // Assert
             Assert.False(isBookAllowed);
         }
+
+        [Theory]
+        [InlineData(4, true, 2, true, true)]
+        [InlineData(4, false, 3, true, false)]
+        [InlineData(4, true, 5, true, false)]
+        public void IsBookAllowed(
+            int allowedNumberOfPerson,
+            bool acceptPets,
+            int amountOfPerson,
+            bool hasPet,
+            bool result)
+        {
+            // Arrange
+            var place = new Place(
+               "Title",
+               "Test Description",
+               100m,
+               new Address("Street", "123", "12345678", "District", "City", "State", "BR"),
+               allowedNumberOfPerson,
+               acceptPets,
+               123);
+
+            // Act
+            var isBookAllowed = place.IsBookAllowed(hasPet, amountOfPerson);
+
+            // Assert
+            Assert.Equal(result, isBookAllowed);
+        }
+
+    
     }
 }
