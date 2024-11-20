@@ -88,9 +88,9 @@ namespace PlaceRentalApp.Application.Services
                 model.CreatedBy
                 );
 
-            _placeRepository.Add(place);
+            var id = _placeRepository.Add(place);
 
-            return ResultViewModel<int>.Success(place.Id);
+            return ResultViewModel<int>.Success(id);
         }
 
         public ResultViewModel InsertAmenity(int id, CreatePlaceAmenityInputModel model)
