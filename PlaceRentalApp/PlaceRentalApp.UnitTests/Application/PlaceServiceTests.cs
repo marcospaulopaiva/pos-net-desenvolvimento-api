@@ -2,6 +2,7 @@
 using PlaceRentalApp.Application.Models;
 using PlaceRentalApp.Application.Services;
 using PlaceRentalApp.Core.Repositories;
+using PlaceRentalApp.UnitTests.Fakes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,30 @@ namespace PlaceRentalApp.UnitTests.Application
                 p => p.Title == createPlaceInputModel.Title &&
                 p.DailyPrice == createPlaceInputModel.DailyPrice));
 
-
         }
+
+        [Fact]
+        public void GetById_Exists_Success()
+        {
+            // Arrange
+            var place = new PlaceFake().Generate();
+            var repository = Substitute.For<IPlaceRepository>();
+
+            repository
+                .GetById(1)
+                .Returns(place);
+
+            // Act
+            var result = new PlaceService(repository).GetById(1);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.NotNull(result.Data);
+            Assert.True(result.IsSuccess);
+            Assert.Equal(place.Id, result.Data.Id);
+
+            repository.Received(1).GetById(1);
+        }
+
     }
 }
