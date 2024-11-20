@@ -1,4 +1,5 @@
-﻿using PlaceRentalApp.Core.ValueObjects;
+﻿using FluentAssertions;
+using PlaceRentalApp.Core.ValueObjects;
 using static PlaceRentalApp.Core.Entities.BaseEntity;
 
 namespace PlaceRentalApp.UnitTests.Core
@@ -27,9 +28,15 @@ namespace PlaceRentalApp.UnitTests.Core
 
             //Assert
             Assert.True(result);
+
             Assert.Equal(newTitle, place.Title);
+            place.Title.Should().BeEquivalentTo(newTitle);
+
             Assert.Equal(newDescription, place.Description);
+            place.Description.Should().BeEquivalentTo(newDescription);
+            
             Assert.Equal(newDailyPrice, place.DailyPrice);
+            place.DailyPrice.Should().Be(newDailyPrice);
 
         }
 

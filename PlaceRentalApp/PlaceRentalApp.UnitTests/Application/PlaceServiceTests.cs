@@ -3,11 +3,6 @@ using PlaceRentalApp.Application.Models;
 using PlaceRentalApp.Application.Services;
 using PlaceRentalApp.Core.Repositories;
 using PlaceRentalApp.UnitTests.Fakes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static PlaceRentalApp.Core.Entities.BaseEntity;
 
 namespace PlaceRentalApp.UnitTests.Application
