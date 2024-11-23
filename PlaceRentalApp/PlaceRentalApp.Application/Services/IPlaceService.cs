@@ -17,5 +17,7 @@ namespace PlaceRentalApp.Application.Services
         ResultViewModel InsertAmenity(int id, CreatePlaceAmenityInputModel model);
 
         ResultViewModel Update(int id, UpdatePlaceInputModel model);
+
+        ResultViewModel Cancel(int id);
     }
 }

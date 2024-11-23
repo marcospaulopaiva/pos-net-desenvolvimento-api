@@ -4,7 +4,7 @@
     {
         public class PlaceBook : BaseEntity
         {
-            protected PlaceBook() { }
+            public PlaceBook() { }
 
             public PlaceBook(int idUser, int idPlace, DateTime startDate, DateTime endDate, string comments)
                 : base()

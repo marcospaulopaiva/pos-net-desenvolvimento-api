@@ -78,5 +78,32 @@ namespace PlaceRentalApp.UnitTests.Application
             repository.Received(1).GetById(1);
         }
 
+        [Fact]
+        public void Cancel_PlaceIsOk_Success()
+        {
+            // Arrange
+            var id = 123;
+            var place = new PlaceFake(id)
+                .Generate();
+
+            var repository = Substitute.For<IPlaceRepository>();
+
+            repository
+                .GetById(Arg.Any<int>())
+                .Returns(place);
+
+            var service = new PlaceService(repository);
+
+            // Act
+            var result = service.Cancel(id);
+
+
+            // Assert
+            Assert.True(result.IsSuccess);
+
+            repository
+                .Received(1)
+                .GetById(id);
+        }
     }
 }

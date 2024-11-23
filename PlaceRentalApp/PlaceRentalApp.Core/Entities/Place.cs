@@ -62,6 +62,18 @@ namespace PlaceRentalApp.Core.Entities
 
                 return amontOfPerson <= AllowedNumberPerson;
             }
+
+            public void Cancel()
+            {
+                if (IsInMiddleOfBooking())
+                    throw new InvalidOperationException("Invalid status");
+
+                Status = PlaceStatus.Inactive;
+            }
+
+            private bool IsInMiddleOfBooking()
+                => Books.Any(b => b.StartDate <= DateTime.Today && b.EndDate >= DateTime.Today);
+
         }
     }
 }
