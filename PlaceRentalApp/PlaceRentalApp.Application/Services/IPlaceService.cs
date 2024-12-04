@@ -1,5 +1,4 @@
 ﻿using PlaceRentalApp.Application.Models;
-using static PlaceRentalApp.Core.Entities.BaseEntity;
 
 namespace PlaceRentalApp.Application.Services
 {
